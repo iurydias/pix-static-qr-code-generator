@@ -22,7 +22,7 @@ func (p *PixStaticQRCodeGenerator) SetData(id, pixKey, description, merchantName
 	p.payloadGenerator.SetId(id).SetPixKey(pixKey).SetDescription(description).SetMerchantName(merchantName).SetMerchantCity(merchantCity).SetAmount(amount)
 }
 
-func (p *PixStaticQRCodeGenerator) GeneratePixQRCode(path string) error {
+func (p *PixStaticQRCodeGenerator) Generate(path string) error {
 	payload, err := p.payloadGenerator.GetPayload()
 	if err != nil {
 		return errors.Wrap(err, "failed to generate payload")
