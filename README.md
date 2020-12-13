@@ -13,15 +13,15 @@ A PIX static QR Code generator to help in golang services development
 ```
  ##### Setting Data
  
- ```go
+```go
     // id is a identification for the transaction *optional
     // pixKey is the receiver PIX key *required
     // description is a additional information for the transaction *optional
     // merchantName is the name of the PIX receiver *optional
     // merchantCity is the city of the PIX receiver *optional
     // amount is the amount of the transaction *required
-     pix_static_qr_code_generator.SetData(id, pixKey, description, merchantName, merchantCity string, amount float64)
- ```
+    pix_static_qr_code_generator.SetData(id, pixKey, description, merchantName, merchantCity string, amount float64)
+```
  
 #### Generating QR Code
 
@@ -30,7 +30,7 @@ A PIX static QR Code generator to help in golang services development
    pix_static_qr_code_generator.Generate("./qr.png")
 ```
 ##### Generating
- ```go
+```go
     // path is where the qr code image will be saved and your file name
-     pix_static_qr_code_generator.Generate(path string)
- ```
+    pix_static_qr_code_generator.Generate(path string)
+```
