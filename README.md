@@ -23,7 +23,7 @@ A PIX static QR Code generator to help in golang services development
      pix_static_qr_code_generator.SetData(id, pixKey, description, merchantName, merchantCity string, amount float64)
  ```
  
-##### Generating QR Code
+#### Generating QR Code
 
 ##### Example
 ```go

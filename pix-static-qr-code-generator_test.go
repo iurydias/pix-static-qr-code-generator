@@ -18,7 +18,7 @@ func TestNewPixQRCode(t *testing.T) {
 		name := "qr.png"
 		err := pixQRCodeGenerator.GeneratePixQRCode(path, name)
 		Expect(err).ShouldNot(HaveOccurred())
-		img := getImage(path)
+		img := getImage(path + name)
 		qrCode, err := goqr.Recognize(img)
 		Expect(err).ShouldNot(HaveOccurred())
 		Expect(len(qrCode)).Should(BeEquivalentTo(1))
