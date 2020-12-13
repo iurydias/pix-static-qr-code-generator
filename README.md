@@ -26,10 +26,12 @@ A PIX static QR Code generator to help in golang services development
 #### Generating QR Code
 
 ##### Example
+
 ```go
    pix_static_qr_code_generator.Generate("./qr.png")
 ```
 ##### Generating
+
 ```go
     // path is where the qr code image will be saved and your file name
     pix_static_qr_code_generator.Generate(path string)
