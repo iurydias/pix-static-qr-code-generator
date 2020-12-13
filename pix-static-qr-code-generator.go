@@ -1,7 +1,6 @@
 package pix_static_qr_code_generator
 
 import (
-	"fmt"
 	"github.com/pkg/errors"
 	"pix-static-qr-code-generator/payload-generator"
 	"pix-static-qr-code-generator/qr-code-generator"
@@ -23,12 +22,12 @@ func (p *PixStaticQRCodeGenerator) SetData(id, pixKey, description, merchantName
 	p.payloadGenerator.SetId(id).SetPixKey(pixKey).SetDescription(description).SetMerchantName(merchantName).SetMerchantCity(merchantCity).SetAmount(amount)
 }
 
-func (p *PixStaticQRCodeGenerator) GeneratePixQRCode(path, name string) error {
+func (p *PixStaticQRCodeGenerator) GeneratePixQRCode(path string) error {
 	payload, err := p.payloadGenerator.GetPayload()
 	if err != nil {
 		return errors.Wrap(err, "failed to generate payload")
 	}
-	err = p.qRCodeGenerator.Generate(payload, fmt.Sprintf("%s%s.png", path, name))
+	err = p.qRCodeGenerator.Generate(payload, path)
 	if err != nil {
 		return errors.Wrap(err, "failed to generate qr code image")
 	}

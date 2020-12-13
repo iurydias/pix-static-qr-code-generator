@@ -14,11 +14,10 @@ func TestNewPixQRCode(t *testing.T) {
 	pixQRCodeGenerator := New()
 	t.Run("it generates a pix static qr code", func(t *testing.T) {
 		pixQRCodeGenerator.SetData("123", "iury@email.com", "a new payment", "Iury", "Salvador", 15.00)
-		path := "./"
-		name := "qr"
-		err := pixQRCodeGenerator.GeneratePixQRCode(path, name)
+		path := "./qr.png"
+		err := pixQRCodeGenerator.GeneratePixQRCode(path)
 		Expect(err).ShouldNot(HaveOccurred())
-		img := getImage(path + name)
+		img := getImage(path)
 		qrCode, err := goqr.Recognize(img)
 		Expect(err).ShouldNot(HaveOccurred())
 		Expect(len(qrCode)).Should(BeEquivalentTo(1))
