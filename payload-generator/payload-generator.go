@@ -1,4 +1,4 @@
-package payload
+package payload_generator
 
 import (
 	"errors"
@@ -7,7 +7,7 @@ import (
 	"strconv"
 )
 
-type Payload struct {
+type PayloadGenerator struct {
 	id          string
 	pixKey      string
 	description string
@@ -20,11 +20,11 @@ type Merchant struct {
 	city string
 }
 
-func New() *Payload {
-	return new(Payload)
+func New() IPayloadGenerator {
+	return new(PayloadGenerator)
 }
 
-func (p *Payload) validateFields() error {
+func (p *PayloadGenerator) validateFields() error {
 	if p.pixKey == "" {
 		return errors.New("pix key is missing")
 	}
@@ -34,7 +34,7 @@ func (p *Payload) validateFields() error {
 	return nil
 }
 
-func (p *Payload) getPayload() (string, error) {
+func (p *PayloadGenerator) GetPayload() (string, error) {
 	if err := p.validateFields(); err != nil {
 		return "", err
 	}
@@ -60,16 +60,16 @@ func (p *Payload) getPayload() (string, error) {
 	return payload + crcValue, nil
 }
 
-func (p *Payload) getCRC(payload string) string {
+func (p *PayloadGenerator) getCRC(payload string) string {
 	return strconv.Itoa(int(crc.CalculateCRC(crc.CCITT, []byte(payload))))
 }
 
-func (p *Payload) getAdditionalDataFieldTemplate() string {
+func (p *PayloadGenerator) getAdditionalDataFieldTemplate() string {
 	txId := p.getValue(ADDITIONAL_DATA_FIELD_TEMPLATE_TXID, p.id)
 	return p.getValue(ADDITIONAL_DATA_FIELD_TEMPLATE, txId)
 }
 
-func (p *Payload) getMerchantAccountInformation() string {
+func (p *PayloadGenerator) getMerchantAccountInformation() string {
 	merchantGUI := p.getValue(MERCHANT_ACCOUNT_INFORMATION_GUI, "br.gov.bcb.pix")
 	merchantKey := p.getValue(MERCHANT_ACCOUNT_INFORMATION_KEY, p.pixKey)
 	merchantDescription := p.getValue(MERCHANT_ACCOUNT_INFORMATION_DESCRIPTION, p.description)
@@ -77,6 +77,6 @@ func (p *Payload) getMerchantAccountInformation() string {
 	return p.getValue(MERCHANT_ACCOUNT_INFORMATION, merchantAccountInformation)
 }
 
-func (p *Payload) getValue(id string, content string) string {
+func (p *PayloadGenerator) getValue(id, content string) string {
 	return fmt.Sprintf("%s%02d%s", id, len(content), content)
 }

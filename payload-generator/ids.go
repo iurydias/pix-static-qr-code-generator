@@ -1,4 +1,4 @@
-package payload
+package payload_generator
 
 const PAYLOAD_FORMAT_INDICATOR = "00"
 const MERCHANT_ACCOUNT_INFORMATION = "26"
