@@ -56,9 +56,9 @@ It sets a merchant city to the payment
 ```go
     generator.SetMerchantCity("Salvador")
 ```
-#### Generating QR Code
+### Generating QR Code
 
-##### Example
+**Example**
 
 ```go
     // passing the path where the qr code image will be saved and your file name
