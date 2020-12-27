@@ -12,32 +12,32 @@ func TestNewPayload(t *testing.T) {
 	t.Run("it sets an id", func(t *testing.T) {
 		id := "123"
 		payload.SetId(id)
-		Expect(payload.GetId()).Should(BeEquivalentTo(id))
+		Expect(payload.id).Should(BeEquivalentTo(id))
 	})
 	t.Run("it sets a pix key", func(t *testing.T) {
 		key := "iury@email.com"
 		payload.SetPixKey(key)
-		Expect(payload.GetPixKey()).Should(BeEquivalentTo(key))
+		Expect(payload.pixKey).Should(BeEquivalentTo(key))
 	})
 	t.Run("it sets a description", func(t *testing.T) {
 		description := "a new payment"
 		payload.SetDescription(description)
-		Expect(payload.GetDescription()).Should(BeEquivalentTo(description))
+		Expect(payload.description).Should(BeEquivalentTo(description))
 	})
 	t.Run("it sets a merchant name", func(t *testing.T) {
 		name := "iury"
 		payload.SetMerchantName(name)
-		Expect(payload.GetMerchantName()).Should(BeEquivalentTo(name))
+		Expect(payload.merchant.name).Should(BeEquivalentTo(name))
 	})
 	t.Run("it sets a merchant city", func(t *testing.T) {
 		city := "Salvador"
 		payload.SetMerchantCity(city)
-		Expect(payload.GetMerchantCity()).Should(BeEquivalentTo(city))
+		Expect(payload.merchant.city).Should(BeEquivalentTo(city))
 	})
 	t.Run("it sets an amount", func(t *testing.T) {
 		amount := 59.9
 		payload.SetAmount(amount)
-		Expect(payload.GetAmount()).Should(BeEquivalentTo(strconv.FormatFloat(amount, 'f', 2, 64)))
+		Expect(payload.amount).Should(BeEquivalentTo(strconv.FormatFloat(amount, 'f', 2, 64)))
 	})
 	t.Run("it gets the payload-generator", func(t *testing.T) {
 		generatedPayload, err := payload.GetPayload()
@@ -49,14 +49,6 @@ func TestNewPayload(t *testing.T) {
 		generatedPayload, err := payload.GetPayload()
 		Expect(err).Should(HaveOccurred())
 		Expect(err.Error()).Should(BeEquivalentTo("pix key is missing"))
-		Expect(generatedPayload).Should(BeEmpty())
-	})
-	t.Run("it gets the payload-generator missing pix amount", func(t *testing.T) {
-		payload = New()
-		payload.SetPixKey("iury@email.com")
-		generatedPayload, err := payload.GetPayload()
-		Expect(err).Should(HaveOccurred())
-		Expect(err.Error()).Should(BeEquivalentTo("amount is missing"))
 		Expect(generatedPayload).Should(BeEmpty())
 	})
 }

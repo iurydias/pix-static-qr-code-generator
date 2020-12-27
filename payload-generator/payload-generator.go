@@ -11,32 +11,22 @@ type PayloadGenerator struct {
 	id          string
 	pixKey      string
 	description string
-	merchant    Merchant
+	merchant    merchant
 	amount      string
 }
 
-type Merchant struct {
+type merchant struct {
 	name string
 	city string
 }
 
-func New() IPayloadGenerator {
+func New() *PayloadGenerator {
 	return new(PayloadGenerator)
 }
 
-func (p *PayloadGenerator) validateFields() error {
-	if p.pixKey == "" {
-		return errors.New("pix key is missing")
-	}
-	if p.amount == "" {
-		return errors.New("amount is missing")
-	}
-	return nil
-}
-
 func (p *PayloadGenerator) GetPayload() (string, error) {
-	if err := p.validateFields(); err != nil {
-		return "", err
+	if p.pixKey == "" {
+		return "", errors.New("pix key is missing")
 	}
 	payloadFormatIndicator := p.getValue(PAYLOAD_FORMAT_INDICATOR, "01")
 	merchantAccountInformation := p.getMerchantAccountInformation()

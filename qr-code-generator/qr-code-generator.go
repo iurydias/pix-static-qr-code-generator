@@ -4,7 +4,7 @@ import "github.com/skip2/go-qrcode"
 
 type QRCodeGenerator struct{}
 
-func New() IQRCodeGenerator {
+func New() *QRCodeGenerator {
 	return new(QRCodeGenerator)
 }
 

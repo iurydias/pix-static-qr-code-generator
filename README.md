@@ -4,35 +4,63 @@ A PIX static QR Code generator to help in golang services development
 
 ## Usage
 
-#### Setting data to PIX Qr Code
-
-##### Example
+### Instancing a new generator
 
 ```go
-    pix_static_qr_code_generator.SetData("123", "iury@email.com", "a new payment", "Iury", "Salvador", 15.00)
+    // passing the pix key
+    generator := pix_static_qr_code_generator.New("iury@email.com")
 ```
- ##### Setting Data
- 
+
+### Setting data to PIX Qr Code
+
+#### Methods available
+
+***.SetAmount()***
+
+It sets an amount to the payment
+
+**Example**
 ```go
-    // id is a identification for the transaction *optional
-    // pixKey is the receiver PIX key *required
-    // description is a additional information for the transaction *optional
-    // merchantName is the name of the PIX receiver *optional
-    // merchantCity is the city of the PIX receiver *optional
-    // amount is the amount of the transaction *required
-    pix_static_qr_code_generator.SetData(id, pixKey, description, merchantName, merchantCity string, amount float64)
+    generator.SetAmount(15.00)
 ```
- 
+***.SetDescription()***
+
+It sets a description to the payment
+
+**Example**
+```go
+    generator.SetDescription("a new payment")
+```
+
+***.SetId()***
+
+It sets an identification to the payment
+
+**Example**
+```go
+    generator.SetId("123")
+```
+***.SetMerchantName()***
+
+It sets a merchant name to the payment
+
+**Example**
+```go
+    generator.SetMerchantName("Iury")
+```
+***.SetMerchantCity()***
+
+It sets a merchant city to the payment
+
+**Example**
+```go
+    generator.SetMerchantCity("Salvador")
+```
 #### Generating QR Code
 
 ##### Example
 
 ```go
-   pix_static_qr_code_generator.Generate("./qr.png")
-```
-##### Generating
-
-```go
-    // path is where the qr code image will be saved and your file name
-    pix_static_qr_code_generator.Generate(path string)
+    // passing the path where the qr code image will be saved and your file name
+   generator.Generate("./qr.png")
 ```

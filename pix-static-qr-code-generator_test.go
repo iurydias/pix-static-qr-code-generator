@@ -11,9 +11,13 @@ import (
 
 func TestNewPixQRCode(t *testing.T) {
 	RegisterTestingT(t)
-	pixQRCodeGenerator := New()
+	pixQRCodeGenerator := New("iury@email.com")
 	t.Run("it generates a pix static qr code", func(t *testing.T) {
-		pixQRCodeGenerator.SetData("123", "iury@email.com", "a new payment", "Iury", "Salvador", 15.00)
+		pixQRCodeGenerator.SetAmount(15.00)
+		pixQRCodeGenerator.SetId("123")
+		pixQRCodeGenerator.SetDescription("a new payment")
+		pixQRCodeGenerator.SetMerchantName("Iury")
+		pixQRCodeGenerator.SetMerchantCity("Salvador")
 		path := "./qr.png"
 		err := pixQRCodeGenerator.Generate(path)
 		Expect(err).ShouldNot(HaveOccurred())
